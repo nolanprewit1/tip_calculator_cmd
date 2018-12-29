@@ -91,15 +91,14 @@ def continue_question():
     print("")
     
     while True:
-        try:
-            choice = str(input("Would you like to calculate another bill? (y/N)") or "N")
-            choice = choice.isupper()
-        except ValueError:
+        choice = input("Would you like to calculate another bill? (y/N)" or "N")
+        choice = choice.upper()
+        print(choice)
+
+        if (choice != "Y") and (choice != "N"):
             print("Please enter Y or N...")
             continue
-        if (choice != "Y") or (choice != "N"):
-            print("Please enter Y or N...")
-            continue
+
         return choice
 
 def main():
@@ -113,8 +112,13 @@ def main():
         choice = continue_question()
         
         if choice == "Y":
+            clear_console()
             continue
         
+        clear_console()
+        display_figlet()
+        print("Closing application....")
+        time.sleep(3)
         break
         
 if __name__ == '__main__':
