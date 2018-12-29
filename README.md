@@ -1,8 +1,7 @@
-#h1 A tip calculator with a cmd interface {
+# A tip calculator with a cmd interface 
+https://github.com/nolanprewit1/tip_calculator_cmd.git
 
-    https://github.com/nolanprewit1/tip_calculator_cmd.git
 
-}
 
 What Is This? {
 
