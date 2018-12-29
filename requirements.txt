@@ -1,2 +1,1 @@
 pyfiglet==0.8.post0
-click==7.0
