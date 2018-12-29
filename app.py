@@ -1,6 +1,7 @@
 import time
 import json
 import os
+import log
 
 from pyfiglet import Figlet
 
@@ -32,6 +33,7 @@ def main():
     ### DISPLAY THE APPLICATION NAME USING FIGLET ###
     figlet = Figlet(font='big')
     print (figlet.renderText(config.get('name')))
+    log("Welcome to the Tip Calculator CMD")
 
     # GET THE USER INPUT
     bill = get_bill_information ()
