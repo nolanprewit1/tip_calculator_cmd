@@ -36,8 +36,6 @@ def main():
     # GET THE USER INPUT
     bill = get_bill_information ()
 
-    print(bill)
-
     # CALCULATE THE CHECK TIP
     bill.check_tip = (float(bill.check_amount) / 100) * float(bill.tip_percentage)
 
