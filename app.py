@@ -16,8 +16,6 @@ class Bill(object):
     person_total = 0
     person_tip = 0
 
-### FUNCTIONS ###
-
 def get_bill_information():
     # IMPORT BILL OBJECT
     bill = Bill()
@@ -31,6 +29,10 @@ def get_bill_information():
     return bill
 
 def main():
+    ### DISPLAY THE APPLICATION NAME USING FIGLET ###
+    figlet = Figlet(font='big')
+    print (figlet.renderText(config.get('name')))
+
     # GET THE USER INPUT
     bill = get_bill_information ()
 
@@ -53,12 +55,5 @@ def main():
     
     time.sleep(5)
 
-### DISPLAY THE APPLICATION NAME USING FIGLET ###
-figlet = Figlet(font='big')
-print (figlet.renderText(config.get('name')))
-
-main()
-
-# if __name__ == '__main__':
-#     app.debug = os.environ.get('FLASK_DEBUG', True)
-#     app.run(port=7000)``
+if __name__ == '__main__':
+    main()
