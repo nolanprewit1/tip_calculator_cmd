@@ -8,6 +8,7 @@ with open('config.json') as config_file:
     config = json.load(config_file)
 
 class Bill(object):
+
     num_people = 0
     check_amount = 0
     tip_percentage = 0 
@@ -16,44 +17,105 @@ class Bill(object):
     person_total = 0
     person_tip = 0
 
-def get_bill_information():
-    # IMPORT BILL OBJECT
-    bill = Bill()
+def clear_console():
+    
+    os.system('cls' if os.name=='nt' else 'clear')
 
-    # GET THE BILL INFORMATION FROM THE USER
-    bill.num_people = input ("Number of people to split the check by [0]: ")
-    bill.check_amount = input ("Check Amount: ")
-    bill.tip_percentage = input ("Tip % : ")
+def display_figlet():
 
-    # RETURN INFORMATION TO BE CALCULATED
-    return bill
-
-def main():
-    ### DISPLAY THE APPLICATION NAME USING FIGLET ###
+    # DISPLAY THE APPLICATION NAME USING FIGLET
     figlet = Figlet(font='big')
     print (figlet.renderText(config.get('name')))
 
-    # GET THE USER INPUT
-    bill = get_bill_information ()
+def get_bill_information():
+
+    display_figlet()
+
+    while True: 
+        try:
+            Bill.num_people = int(input("Number of people to split the check by [1]: ") or 1)
+        except ValueError:
+            print("Please enter a number....")
+            continue
+        break  
+
+    while True:
+        try: 
+            Bill.check_amount = float(input("Check Amount: "))
+        except ValueError:
+            print("Please enter a valide check amount... EXAMPLE: 22.05")
+            continue
+        break
+
+    while True:
+        try:
+            Bill.tip_percentage = float(input("Tip % [20]: ") or 20)
+        except ValueError:
+            print("Please enter a valid tip amount.... EXAMPLE: 15")
+            continue
+        break
+
+    clear_console()
+    return 
+
+def calculate_bill():
 
     # CALCULATE THE CHECK TIP
-    bill.check_tip = (float(bill.check_amount) / 100) * float(bill.tip_percentage)
+    Bill.check_tip = (float(Bill.check_amount) / 100) * float(Bill.tip_percentage)
 
     # CALCULATE THE CHECK TOTAL
-    bill.check_total = float(bill.check_tip) + float(bill.check_amount)
+    Bill.check_total = float(Bill.check_tip) + float(Bill.check_amount)
 
     # CALCULATE THE CHECK TIP PER PERSON
-    bill.person_tip = float(bill.check_tip) / float(bill.num_people)
+    Bill.person_tip = float(Bill.check_tip) / float(Bill.num_people)
     
     # CALCULATE THE CHECK TOTAL PER PERSON
-    bill.person_total = float(bill.check_total) / float(bill.num_people)
+    Bill.person_total = float(Bill.check_total) / float(Bill.num_people)
 
-    print ("Check total:", round(bill.check_total, 2))
-    print ("Check tip:", round(bill.check_tip, 2))
-    print ("Check total per person:", round(bill.person_total, 2))
-    print ("Check tip per person:", round(bill.person_tip, 2))
+def display_bill_information():
+
+    display_figlet()
+
+    print ("#### CALCULATED TOTALS ####")
+    print("")
+    print ("Check total: \t\t\t $", "{0:.2f}".format(round(Bill.check_total, 2)))
+    print ("Check tip: \t\t\t $", "{0:.2f}".format(round(Bill.check_tip, 2)))
+    print ("Check total per person: \t $", "{0:.2f}".format(round(Bill.person_total, 2)))
+    print ("Check tip per person: \t\t $", "{0:.2f}".format(round(Bill.person_tip, 2)))
+
+    return
+
+def continue_question():
+
+    print("")
+    print("")
     
-    time.sleep(5)
+    while True:
+        try:
+            choice = str(input("Would you like to calculate another bill? (y/N)") or "N")
+            choice = choice.isupper()
+        except ValueError:
+            print("Please enter Y or N...")
+            continue
+        if (choice != "Y") or (choice != "N"):
+            print("Please enter Y or N...")
+            continue
+        return choice
 
+def main():
+    while True:
+        get_bill_information ()
+
+        calculate_bill()    
+
+        display_bill_information()   
+
+        choice = continue_question()
+        
+        if choice == "Y":
+            continue
+        
+        break
+        
 if __name__ == '__main__':
     main()
