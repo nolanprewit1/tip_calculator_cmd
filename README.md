@@ -1,4 +1,4 @@
-# A tip calculator with a cmd interface 
+# Tip Calculator CMD
 
 Build Information 
 
