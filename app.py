@@ -1,5 +1,6 @@
 ### IMPORTS ###
 
+from pyfiglet import Figlet
 import time
 
 ### GLOBAL VARIABLES ###
@@ -53,5 +54,8 @@ def main():
     time.sleep(5)
 
 ### PRIMARY CODE ###
+
+figlet = Figlet(font='big')
+print (figlet.renderText('Tip Calculator CMD'))
 
 main()
