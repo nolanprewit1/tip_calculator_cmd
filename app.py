@@ -1,11 +1,11 @@
-### IMPORTS ###
+import time
+import json
+import os
 
 from pyfiglet import Figlet
-import time
 
-### GLOBAL VARIABLES ###
-
-### CLASS OBJECTS ###
+with open('config.json') as config_file:
+    config = json.load(config_file)
 
 class Bill(object):
     num_people = 0
@@ -53,9 +53,12 @@ def main():
     
     time.sleep(5)
 
-### PRIMARY CODE ###
-
+### DISPLAY THE APPLICATION NAME USING FIGLET ###
 figlet = Figlet(font='big')
-print (figlet.renderText('Tip Calculator CMD'))
+print (figlet.renderText(config.get('name')))
 
 main()
+
+# if __name__ == '__main__':
+#     app.debug = os.environ.get('FLASK_DEBUG', True)
+#     app.run(port=7000)``
